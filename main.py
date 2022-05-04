@@ -7,14 +7,16 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+
 class PunchCard():
     def __init__(self):
-        self.username = ""#账号
-        self.password = ""#密码
+        self.username = ""  # 账号
+        self.password = ""  # 密码
 
-        path = 'C:/Program Files (x86)/Google/Chrome/Application/chromedriver'#webdriver路径，需要放在Chrome/Application下
+        path = 'C:/Program Files (x86)/Google/Chrome/Application/chromedriver'  # webdriver路径，需要放在Chrome/Application下
         self.driver = webdriver.Chrome(executable_path=path)
         self.vars = {}
+
     def setup_method(self, method):
         pass
 
@@ -60,6 +62,7 @@ class PunchCard():
         self.driver.switch_to.window(self.vars["root"])
         self.driver.close()
         self.driver.switch_to.window(self.vars["undefined"])
+
 
 if __name__ == '__main__':
     punchcard = PunchCard()
