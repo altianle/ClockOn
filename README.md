@@ -1,7 +1,8 @@
-#×Ô¶¯´ò¿¨
+#è‡ªåŠ¨æ‰“å¡
 
-×¼±¸£º
-1 °²×°webdriverÓëselenium
+å‡†å¤‡ï¼š
+
+1 å®‰è£…webdriverä¸selenium
 https://www.cnblogs.com/fnng/archive/2013/05/29/3106515.html
 
-2 ÔÚPunchCardÀàÖĞĞŞ¸ÄÕËºÅ¡¢ÃÜÂëÊôĞÔ
+2 åœ¨PunchCardç±»ä¸­ä¿®æ”¹è´¦å·ã€å¯†ç å±æ€§
