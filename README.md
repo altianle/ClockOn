@@ -8,7 +8,7 @@
 
     selenium：pip install selenium
     webdriver：https://registry.npmmirror.com/binary.html?path=chromedriver/
-    需要使用chrome的对应版本，解压后放在...\Google\Chrome\Application\，并把该目录放在path环境变量中
+    需要使用chrome的对应版本，解压后放在...\Google\Chrome\Application\ 文件目录下，并把该目录放在path环境变量中
 
 3 在config.ini中修改账号、密码
 
