@@ -58,10 +58,12 @@ class PunchCard():
         target = self.driver.find_element(By.CSS_SELECTOR, ".submitbtn")
         self.driver.execute_script("arguments[0].scrollIntoView();", target)
         self.driver.find_element(By.CSS_SELECTOR, ".submitbtn").click()
+
+        # 电脑有时候需要手动定位
+        time.sleep(100)
         self.driver.close()
         self.driver.switch_to.window(self.vars["root"])
         self.driver.close()
-        self.driver.switch_to.window(self.vars["undefined"])
 
 
 if __name__ == '__main__':
