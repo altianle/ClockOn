@@ -21,9 +21,7 @@ class PunchCard():
     def __init__(self):
         self.username = getConfig("info", "userName")  # 账号
         self.password = getConfig("info", "passWord")  # 密码
-
-        path = 'C:/Program Files (x86)/Google/Chrome/Application/chromedriver'  # webdriver路径，需要放在Chrome/Application下
-        self.driver = webdriver.Chrome(executable_path=path)
+        self.driver = webdriver.Chrome()
         self.vars = {}
 
     def setup_method(self, method):
