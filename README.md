@@ -3,6 +3,8 @@
 **使用前准备：**
 
 1 安装Chrome浏览器
+    
+    在设置-关于Chrome中找到版本号，记录下来以下载对应webdriver
 
 2 安装webdriver与selenium
 
