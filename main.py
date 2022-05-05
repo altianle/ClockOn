@@ -2,16 +2,25 @@
 # -*- coding:utf-8 -*-
 # author:ALian  time:2022/5/3
 
-
 import time
+import configparser
+import os.path
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
+def getConfig(section, key=None):
+    config = configparser.ConfigParser()
+    dir = os.path.abspath(".")
+    file_path = dir + '\\config.ini'
+    config.read(file_path, encoding='utf-8')
+    return config.get(section, key)
+
+
 class PunchCard():
     def __init__(self):
-        self.username = ""  # 账号
-        self.password = ""  # 密码
+        self.username = getConfig("info", "userName")  # 账号
+        self.password = getConfig("info", "passWord")  # 密码
 
         path = 'C:/Program Files (x86)/Google/Chrome/Application/chromedriver'  # webdriver路径，需要放在Chrome/Application下
         self.driver = webdriver.Chrome(executable_path=path)
@@ -60,7 +69,7 @@ class PunchCard():
         self.driver.find_element(By.CSS_SELECTOR, ".submitbtn").click()
 
         # 电脑有时候需要手动定位
-        time.sleep(100)
+        time.sleep(15)
         self.driver.close()
         self.driver.switch_to.window(self.vars["root"])
         self.driver.close()
