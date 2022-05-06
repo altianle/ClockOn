@@ -62,12 +62,21 @@ class PunchCard():
         self.driver.find_element(By.CSS_SELECTOR, ".date-list-item:nth-child(1) > .date-list-item-day").click()
 
         time.sleep(1)
+        target = self.driver.find_element(By.CSS_SELECTOR, ".van-button")
+        self.driver.execute_script("arguments[0].scrollIntoView();", target)
+        self.driver.find_element(By.CSS_SELECTOR, ".van-button").click()
+        time.sleep(2)
+        self.driver.find_element(By.CSS_SELECTOR, ".van-button").click()
+        time.sleep(2)
+        self.driver.find_element(By.CSS_SELECTOR, ".van-button").click()
+
+        time.sleep(13)
         target = self.driver.find_element(By.CSS_SELECTOR, ".submitbtn")
         self.driver.execute_script("arguments[0].scrollIntoView();", target)
         self.driver.find_element(By.CSS_SELECTOR, ".submitbtn").click()
 
-        # 电脑有时候需要手动定位
-        time.sleep(15)
+
+        time.sleep(5)
         self.driver.close()
         self.driver.switch_to.window(self.vars["root"])
         self.driver.close()
