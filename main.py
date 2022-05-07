@@ -27,7 +27,14 @@ class PunchCard():
 
         option = webdriver.ChromeOptions()
         option.add_argument('headless')
-        self.driver = webdriver.Chrome(chrome_options=option)
+        try:
+            self.driver = webdriver.Chrome(chrome_options=option)
+
+        except:
+            window = tkinter.Tk()
+            window.withdraw()
+            showerror('错误', '打卡失败：未找到webdriver，请检查路径设置')
+            sys.exit(0)
         #self.driver = webdriver.Chrome()
         self.vars = {}
 
@@ -114,6 +121,7 @@ class PunchCard():
         self.driver.close()
         self.driver.switch_to.window(self.vars["root"])
         self.driver.close()
+        self.driver.quit()
         return
 
 
