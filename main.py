@@ -11,6 +11,7 @@ import tkinter
 from tkinter.messagebox import *
 import sys
 
+
 def getConfig(section, key=None):
     config = configparser.ConfigParser()
     dir = os.path.abspath(".")
@@ -44,16 +45,22 @@ class PunchCard():
             return set(wh_now).difference(set(wh_then)).pop()
 
     def run(self):
-        self.driver.get("http://sso.sut.edu.cn/sso/login?service=http://main.sut.edu.cn/user/simpleSSOLogin")
-        self.driver.set_window_size(1920, 1080)
         window = tkinter.Tk()
         window.withdraw()  # 退出默认 tk 窗口
+        self.driver.get("http://sso.sut.edu.cn/sso/login?service=http://main.sut.edu.cn/user/simpleSSOLogin")
+        self.driver.set_window_size(1920, 1080)
+
         try:
             self.driver.find_element_by_name("username").send_keys(self.username)
             self.driver.find_element_by_name("password").send_keys(self.password)
             self.driver.find_element(By.CSS_SELECTOR, ".password_arrows").click()
+        except:
+            showerror('错误', '网页无法打开！')
+            return
 
-            time.sleep(3)
+        time.sleep(3)
+
+        try:
             self.vars["window_handles"] = self.driver.window_handles
             self.driver.find_element(By.CSS_SELECTOR, "a:nth-child(26) img").click()
         except:
@@ -102,7 +109,7 @@ class PunchCard():
 
         time.sleep(1)
         showinfo('提示', '打卡成功！')
-        #print(f'提示: {result}')
+        # print(f'提示: {result}')
 
         self.driver.close()
         self.driver.switch_to.window(self.vars["root"])
@@ -114,5 +121,3 @@ if __name__ == '__main__':
     punchcard = PunchCard()
     punchcard.run()
     sys.exit(0)
-
-
