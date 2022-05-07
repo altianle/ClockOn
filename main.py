@@ -55,7 +55,7 @@ class PunchCard():
             self.driver.find_element_by_name("password").send_keys(self.password)
             self.driver.find_element(By.CSS_SELECTOR, ".password_arrows").click()
         except:
-            showerror('错误', '网页无法打开！')
+            showerror('错误', '打卡失败：网页无法打开！')
             return
 
         time.sleep(3)
@@ -64,7 +64,7 @@ class PunchCard():
             self.vars["window_handles"] = self.driver.window_handles
             self.driver.find_element(By.CSS_SELECTOR, "a:nth-child(26) img").click()
         except:
-            showerror('错误', '账号或密码错误！')
+            showerror('错误', '打卡失败：账号或密码错误！')
             return
 
         self.vars["win5084"] = self.wait_for_window(2000)
@@ -104,7 +104,7 @@ class PunchCard():
             self.driver.find_element(By.CSS_SELECTOR, ".submitbtn").click()
 
         except:
-            showerror('错误', '获取地理信息失败！')
+            showerror('错误', '打卡失败：获取地理信息失败！')
             return
 
         time.sleep(1)
