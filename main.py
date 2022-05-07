@@ -54,6 +54,7 @@ class PunchCard():
     def run(self):
         window = tkinter.Tk()
         window.withdraw()  # 退出默认 tk 窗口
+        showinfo('提示', '开始打卡')
         self.driver.get("http://sso.sut.edu.cn/sso/login?service=http://main.sut.edu.cn/user/simpleSSOLogin")
         self.driver.set_window_size(1920, 1080)
 
