@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import tkinter
 from tkinter.messagebox import *
+import sys
 
 def getConfig(section, key=None):
     config = configparser.ConfigParser()
@@ -45,13 +46,20 @@ class PunchCard():
     def run(self):
         self.driver.get("http://sso.sut.edu.cn/sso/login?service=http://main.sut.edu.cn/user/simpleSSOLogin")
         self.driver.set_window_size(1920, 1080)
-        self.driver.find_element_by_name("username").send_keys(self.username)
-        self.driver.find_element_by_name("password").send_keys(self.password)
-        self.driver.find_element(By.CSS_SELECTOR, ".password_arrows").click()
+        window = tkinter.Tk()
+        window.withdraw()  # 退出默认 tk 窗口
+        try:
+            self.driver.find_element_by_name("username").send_keys(self.username)
+            self.driver.find_element_by_name("password").send_keys(self.password)
+            self.driver.find_element(By.CSS_SELECTOR, ".password_arrows").click()
 
-        time.sleep(3)
-        self.vars["window_handles"] = self.driver.window_handles
-        self.driver.find_element(By.CSS_SELECTOR, "a:nth-child(26) img").click()
+            time.sleep(3)
+            self.vars["window_handles"] = self.driver.window_handles
+            self.driver.find_element(By.CSS_SELECTOR, "a:nth-child(26) img").click()
+        except:
+            showerror('错误', '账号或密码错误！')
+            return
+
         self.vars["win5084"] = self.wait_for_window(2000)
         self.vars["root"] = self.driver.current_window_handle
         self.driver.switch_to.window(self.vars["win5084"])
@@ -67,25 +75,33 @@ class PunchCard():
         self.driver.find_element(By.CSS_SELECTOR, ".date-list-item:nth-child(1) > .date-list-item-day").click()
 
         time.sleep(1)
-        target = self.driver.find_element(By.CSS_SELECTOR, ".van-button")
-        self.driver.execute_script("arguments[0].scrollIntoView();", target)
-        self.driver.find_element(By.CSS_SELECTOR, ".van-button").click()
+        try:
+            target = self.driver.find_element(By.CSS_SELECTOR, ".van-button")
+            self.driver.execute_script("arguments[0].scrollIntoView();", target)
+            self.driver.find_element(By.CSS_SELECTOR, ".van-button").click()
+
+        except:
+            showerror('错误', '已经打过卡！')
+            return
+
         time.sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, ".van-button").click()
         time.sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, ".van-button").click()
 
         time.sleep(13)
-        target = self.driver.find_element(By.CSS_SELECTOR, ".submitbtn")
-        self.driver.execute_script("arguments[0].scrollIntoView();", target)
-        self.driver.find_element(By.CSS_SELECTOR, ".submitbtn").click()
 
+        try:
+            target = self.driver.find_element(By.CSS_SELECTOR, ".submitbtn")
+            self.driver.execute_script("arguments[0].scrollIntoView();", target)
+            self.driver.find_element(By.CSS_SELECTOR, ".submitbtn").click()
 
-        time.sleep(5)
+        except:
+            showerror('错误', '获取地理信息失败！')
+            return
 
-        window = tkinter.Tk()
-        window.withdraw()  # 退出默认 tk 窗口
-        result = showinfo('提示', '打卡成功！')
+        time.sleep(1)
+        showinfo('提示', '打卡成功！')
         #print(f'提示: {result}')
 
         self.driver.close()
@@ -97,4 +113,6 @@ class PunchCard():
 if __name__ == '__main__':
     punchcard = PunchCard()
     punchcard.run()
+    sys.exit(0)
+
 
