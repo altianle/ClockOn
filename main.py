@@ -7,7 +7,8 @@ import configparser
 import os.path
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+import tkinter
+from tkinter.messagebox import *
 
 def getConfig(section, key=None):
     config = configparser.ConfigParser()
@@ -21,7 +22,11 @@ class PunchCard():
     def __init__(self):
         self.username = getConfig("info", "userName")  # 账号
         self.password = getConfig("info", "passWord")  # 密码
-        self.driver = webdriver.Chrome()
+
+        option = webdriver.ChromeOptions()
+        option.add_argument('headless')
+        self.driver = webdriver.Chrome(chrome_options=option)
+        #self.driver = webdriver.Chrome()
         self.vars = {}
 
     def setup_method(self, method):
@@ -77,11 +82,19 @@ class PunchCard():
 
 
         time.sleep(5)
+
+        window = tkinter.Tk()
+        window.withdraw()  # 退出默认 tk 窗口
+        result = showinfo('提示', '打卡成功！')
+        #print(f'提示: {result}')
+
         self.driver.close()
         self.driver.switch_to.window(self.vars["root"])
         self.driver.close()
+        return
 
 
 if __name__ == '__main__':
     punchcard = PunchCard()
     punchcard.run()
+
