@@ -27,14 +27,16 @@ class PunchCard():
 
         option = webdriver.ChromeOptions()
         option.add_argument('headless')
+
         try:
             self.driver = webdriver.Chrome(chrome_options=option)
 
         except:
             window = tkinter.Tk()
             window.withdraw()
-            showerror('错误', '打卡失败：未找到webdriver，请检查路径设置')
+            showerror('错误', '打卡失败：未找到webdriver或版本不对，请检查路径设置')
             sys.exit(0)
+
         #self.driver = webdriver.Chrome()
         self.vars = {}
 
@@ -53,7 +55,7 @@ class PunchCard():
 
     def run(self):
         window = tkinter.Tk()
-        window.withdraw()  # 退出默认 tk 窗口
+        window.withdraw()
         showinfo('提示', '开始打卡')
         self.driver.get("http://sso.sut.edu.cn/sso/login?service=http://main.sut.edu.cn/user/simpleSSOLogin")
         self.driver.set_window_size(1920, 1080)
