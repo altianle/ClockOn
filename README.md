@@ -9,7 +9,8 @@
 2 安装webdriver
 
     webdriver：https://registry.npmmirror.com/binary.html?path=chromedriver/
-    需要使用chrome的对应版本，解压后放在...\Google\Chrome\Application\ 文件目录下，并把该目录放在path环境变量中
+    需要使用chrome的对应版本，解压后放在chrome的安装路径 ...\Google\Chrome\Application\ 文件目录下，并把该目录放在path环境变量中
+    chrome自动更新后，需要手动更换webdriver版本
 
 3 下载右侧release中的压缩包ClockOn，并解压缩，得到config.ini和main.exe
 
